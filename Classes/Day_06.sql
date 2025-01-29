@@ -70,7 +70,7 @@ MIN(column): Returns the minimum value of a column.
 
 
 5. Control Flow Functions
-These fumctions allow for conditional logic in SQL queries.
+These functions allow for conditional logic in SQL queries.
 
 IF(condition, true_value, false_value): Returns one value if the conditions is true and another value if it is false.
 
@@ -88,7 +88,7 @@ CONVERT(expression, type): Similar to CAST, but with different syntax.
 
 
 7. JSON Functions
-These fumctions are used to work with JSON data types.
+These functions are used to work with JSON data types.
 
 JSON_EXTRACT(json_doc,path): Extracts data  from a JSON document.
 
