@@ -50,7 +50,7 @@ CURDATE(): Returns the current date.
 
 DATE_FORMAT(date, format): Formats a date according to a specified format.
 
-DATEDIFF(date1, date2): Reurns the difference in days between two dates.	
+DATEDIFF(date1, date2): Returns the difference in days between two dates.	
 
 
 
