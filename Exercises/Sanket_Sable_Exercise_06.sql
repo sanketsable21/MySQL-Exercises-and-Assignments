@@ -1067,3 +1067,76 @@ SELECT TIMESTAMPDIFF(SECOND, Departure_Time, Arrival_Time) AS Flight_Duration_se
 SELECT TIMESTAMPDIFF(MONTH, Departure_Time, Arrival_Time) AS Flight_Duration_month FROM Flights; 
 SELECT TIMESTAMPDIFF(DAY, Departure_Time, Arrival_Time) AS Flight_Duration_day FROM Flights; 
 SELECT TIMESTAMPDIFF(YEAR, Departure_Time, Arrival_Time) AS Flight_Duration_year FROM Flights; 
+
+
+-- Aggregate Functions
+
+-- 1. Count the Total Number of Flight
+SELECT COUNT(*) AS Total_Flights FROM Flights;
+
+-- 2. Count the Number of Unique Departure Airports
+SELECT COUNT(DISTINCT Departure_Airport) AS Unique_Departure_Airports FROM Flights;
+
+-- 3. Concatenate Distinct Flight Numbers
+SELECT GROUP_CONCAT(DISTINCT Flight_Number) AS Flight_Numbers FROM Flights;
+
+-- 4. Count the Number of Flights by Status
+SELECT Status, COUNT(*) AS Flight_Count 
+FROM Flights 
+GROUP BY Status;
+
+-- 5. Calculate the Average Number of Seats Available Across All Flights
+SELECT AVG(Seats_Available) AS Average_Seats_Available FROM Flights;
+
+-- 6. Find the Maximum Flight Duration
+SELECT MAX(Flight_Duration) AS Longest_Flight_Duration FROM Flights;
+
+-- 7. Find the Minimum Flight Duration
+SELECT MIN(Flight_Duration) AS Shortest_Flight_Duration FROM Flights;
+
+-- 8. Calculate the Total Number of Available Seats Across All Flights
+SELECT SUM(Seats_Available) AS Total_Seats_Available FROM Flights;
+
+-- 9. Count the Number of Flights for Each Arrival Airport
+SELECT Arrival_Airport, COUNT(*) AS Total_Flights 
+FROM Flights 
+GROUP BY Arrival_Airport;
+
+-- 10. Calculate the Average Flight Duration for All Flights
+SELECT AVG(Flight_Duration) AS Average_Flight_Duration FROM Flights;
+
+-- 11. Count the Number of Flights Departing from Each Airport
+SELECT Departure_Airport, COUNT(*) AS Total_Flights 
+FROM Flights 
+GROUP BY Departure_Airport;
+
+-- 12. Find the Total Flight Duration for All Flights
+SELECT SUM(Flight_Duration) AS Total_Flight_Duration FROM Flights;
+
+-- 13. Count the Number of Flights with More Than 100 Seats Available
+SELECT COUNT(*) AS Flights_With_Over_100_Seats FROM Flights WHERE Seats_Available > 100;
+
+-- 14. Calculate the Average Flight Duration for Flights Departing from Delhi
+SELECT AVG(Flight_Duration) AS Average_Flight_Duration_Delhi FROM Flights WHERE Departure_Airport = 'Delhi (DEL)';
+
+-- 15. Count the Number of Unique Aircraft Types
+SELECT COUNT(DISTINCT Aircraft_Type) AS Unique_Aircraft_Types FROM Flights;
+
+-- 16. Find the Total Number of Flights for Each Aircraft Type
+SELECT Aircraft_Type, COUNT(*) AS Total_Flights 
+FROM Flights 
+GROUP BY Aircraft_Type;
+
+-- 17. Calculate the Average Number of Seats Available for Flights that are Cancelled
+SELECT AVG(Seats_Available) AS Average_Seats_Cancelled FROM Flights WHERE Status = 'Cancelled';
+
+-- 18. Find the Total Number of Flights for Each Day
+SELECT DATE(Departure_Time) AS Flight_Date, COUNT(*) AS Total_Flights 
+FROM Flights 
+GROUP BY Flight_Date;
+
+-- 19. Calculate the Total Flight Duration for Flights with Status 'On Time'
+SELECT SUM(Flight_Duration) AS Total_On_Time_Flight_Duration FROM Flights WHERE Status = 'On Time';
+
+-- 20. Count the Number of Flights with a Duration Greater Than 180 Minutes
+SELECT COUNT(*) AS Flights_Over_3_Hours FROM Flights WHERE Flight_Duration > 180;
