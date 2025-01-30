@@ -936,7 +936,7 @@ SELECT Flight_Number, LENGTH(Flight_Number) AS Flight_Number_Length FROM Flights
 SELECT Departure_Airport, LENGTH(Departure_Airport) AS Airport_Name_Length FROM Flights;
 
 -- 6. Extract Substring from Flight Number
-SELECT Flight_Number, SUBSTRING(Flight_Number, 3, 3) AS Flight_Substring FROM Flights; 
+SELECT Flight_Number, SUBSTRING(Flight_Number, 3, 3) AS Flight_Substring FROM Flights; -- Doubt -------------------------------------------------
 -- Extracts characters from position 3
 
 -- 7. Find Flights with Flight Numbers Starting with 'AI'
