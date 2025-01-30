@@ -1,0 +1,104 @@
+CREATE DATABASE IF NOT EXISTS LIBRARY_MANAGEMENT_SYSTEM;
+
+USE LIBRARY_MANAGEMENT_SYSTEM;
+
+-- -------------------------------------------------------------TABLE 01-------------------------------------------------------------------
+
+-- BOOKS TABLE
+CREATE TABLE BOOKS(
+	BOOK_ID INT PRIMARY KEY AUTO_INCREMENT,
+    TITLE VARCHAR(255) NOT NULL,
+    PUBLISHED_YEAR INT,
+    AVAILABLE_COPIES INT DEFAULT 4
+);
+
+-- INTSERT INTO BOOKS
+INSERT INTO BOOKS ( TITLE, PUBLISHED_YEAR )
+VALUES
+	('THE PSYCHOLOGY OF MONEY', 2020),
+	('RICH DAD POOR DAD', 1997),
+	('ATOMIC HABITS', 2018),
+	('THE 4-HOUR WORKWEEK', 2007),
+	('THINK AND GROW RICH', 1937),
+	('DEEP WORK', 2016),
+	('THE LEAN STARTUP', 2011),
+	('THE MILLIONAIRE FASTLANE', 2011),
+	('ZERO TO ONE', 2014),
+	('HOW TO WIN FRIENDS AND INFLUENCE PEOPLE', 1936);
+
+DROP TABLE BOOKS;
+
+TRUNCATE BOOKS;
+
+SELECT * FROM BOOKS;
+
+
+-- --------------------------------------------------------------------TABLE 02----------------------------------------------------------------------
+
+-- MEMBERS TABLE
+CREATE TABLE MEMBERS(
+	MEMBER_ID INT PRIMARY KEY AUTO_INCREMENT,
+    FULL_NAME VARCHAR(255),
+    EMAIL VARCHAR(255) UNIQUE,
+    MOBILE VARCHAR(15),
+    ADDRESS VARCHAR(20) DEFAULT 'MUMBAI',
+    MEMBERSHIP_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- INSERT INTO MEMBERS
+INSERT INTO MEMBERS( FULL_NAME, EMAIL, MOBILE )
+VALUES
+	('SANKET SABLE', 'sanketsable123@gmail.com', '8291621013'),
+	('YASH GARUD', 'yashgarud123@gmail.com', '8764518965'),
+	('ANJALI PATIL', 'anjalipatil123@gmail.com', '7894561230'),
+	('MUKASHSHAF MOMIN', 'mukashshafmomin123@gmail.com', '7898521239'),
+	('SHIVAM SINGH', 'shivamsingh123@gmail.com', '8524567535'),
+	('NUPUR LOTEKAR', 'nupurlotekar123@gmail.com', '7715821977'),
+	('ROHIT THORAT', 'rohitthorat123@gmail.com', '8524567531'),
+	('KARAN KHEGDE', 'karankhegade123@gmail.com', '9004178250'),
+	('TANAY KADAM', 'tanaykadam123@gmail.com', '8541263789'),
+	('SOHAM CHUDHARY', 'sohamchaudhary123@gmail.com', '9514562870');
+
+DROP TABLE MEMBERS;
+
+TRUNCATE MEMBERS;
+
+SELECT * FROM MEMBERS;
+
+
+-- -------------------------------------------------------------TABLE 03-----------------------------------------------------------------------
+
+-- AUTHORS TABLE
+CREATE TABLE AUTHORS(
+	AUTHOR_ID INT PRIMARY KEY AUTO_INCREMENT,
+    BOOK_ID INT,
+    AUTHOR_NAME VARCHAR(255),
+    FOREIGN KEY(BOOK_ID) REFERENCES BOOKS(BOOK_ID)
+);
+
+-- INSERT INTO AUTHORS
+INSERT INTO AUTHORS( BOOK_ID, AUTHOR_NAME )
+VALUES 
+	(1, 'MORGAN HOUSEL'),
+	(2, 'ROBERT KIYOSAKI'),
+	(3, 'JAMES CLEAR'),
+	(4, 'TIMOTHY FERRISS'),
+	(5, 'NEPOLEON HILL'),
+	(6, 'CAL NEWPORT'),
+	(7, 'ERIC RIES'),
+	(8, 'MJ DEMARCO'),
+	(9, 'PETER THIEL'),
+	(10, 'DALE CARNEGIE');
+
+DROP TABLE AUTHORS;
+
+TRUNCATE AUTHORS;
+
+SELECT * FROM AUTHORS;
+
+
+-- --------------------------------------------------------TABLE 04-------------------------------------------------------------
+
+-- BORROW_RECORDS TABLE	
+CREATE TABLE BORROW_RECORDS(
+	RECORD_ID INT PRIMARY KEY AUTO_INCREMENT
