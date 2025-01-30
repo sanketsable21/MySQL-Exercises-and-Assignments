@@ -1048,3 +1048,22 @@ SELECT SUM(Flight_Duration) AS Total_On_Time_Flight_Duration FROM Flights WHERE 
 
 -- 20. Count the Number of Flights with a Duration Greater Than 180 Minutes
 SELECT COUNT(*) AS Flights_Over_3_Hours FROM Flights WHERE Flight_Duration > 180;
+
+
+-- Date and Time Functions
+
+-- Extracts the date from the departure time
+SELECT DATE(Departure_Time) AS Departure_Date FROM Flights; 
+
+-- Extracts the time from the departure time
+SELECT TIME(Departure_Time) AS Departure_Time FROM Flights; 
+
+-- Calculates the flight duration in minutes
+SELECT TIMESTAMPDIFF(MINUTE, Departure_Time, Arrival_Time) AS Flight_Duration_Minutes FROM Flights; 
+SELECT TIMESTAMPDIFF(HOUR, Departure_Time, Arrival_Time) AS Flight_Duration_hours FROM Flights; 
+SELECT TIMESTAMPDIFF(SECOND, Departure_Time, Arrival_Time) AS Flight_Duration_second FROM Flights; 
+
+-- Calculates the flight duration in date
+SELECT TIMESTAMPDIFF(MONTH, Departure_Time, Arrival_Time) AS Flight_Duration_month FROM Flights; 
+SELECT TIMESTAMPDIFF(DAY, Departure_Time, Arrival_Time) AS Flight_Duration_day FROM Flights; 
+SELECT TIMESTAMPDIFF(YEAR, Departure_Time, Arrival_Time) AS Flight_Duration_year FROM Flights; 
