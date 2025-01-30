@@ -1140,3 +1140,13 @@ SELECT SUM(Flight_Duration) AS Total_On_Time_Flight_Duration FROM Flights WHERE 
 
 -- 20. Count the Number of Flights with a Duration Greater Than 180 Minutes
 SELECT COUNT(*) AS Flights_Over_3_Hours FROM Flights WHERE Flight_Duration > 180;
+
+
+-- Control Flow Functions
+
+-- Classifies flights as long haul or short haul based on duration
+SELECT IF(Flight_Duration > 4, 'Long Haul', 'Short Haul') AS Flight_Type FROM Flights; 
+
+-- Classifies flights as long haul or short haul based on duration using a case statement
+SELECT CASE WHEN Flight_Duration > 4 THEN 'Long Haul' WHEN Flight_Duration <= 4 THEN 'Short Haul' END 
+AS Flight_Type FROM Flights; 
