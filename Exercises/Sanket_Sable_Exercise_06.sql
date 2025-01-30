@@ -918,7 +918,7 @@ OR Arrival_Airport REGEXP 'Bangalore';
 
 -- functions
 
--- String Functions
+-- String Functions  ( Upper, Lower, Concat, Left, Right, Substring, Count, Locate, Binary )
 
 -- 1. Convert Flight Numbers to Uppercase
 SELECT UPPER(Flight_Number) AS Uppercase_Flight_Number FROM Flights;
