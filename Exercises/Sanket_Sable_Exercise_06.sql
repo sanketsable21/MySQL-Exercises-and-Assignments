@@ -914,3 +914,69 @@ WHERE Aircraft_Type NOT LIKE '%737%';
 SELECT * FROM Flights 
 WHERE Departure_Airport REGEXP 'Bangalore' 
 OR Arrival_Airport REGEXP 'Bangalore';
+
+
+-- functions
+
+-- String Functions
+
+-- 1. Convert Flight Numbers to Uppercase
+SELECT UPPER(Flight_Number) AS Uppercase_Flight_Number FROM Flights;
+
+-- 2. Convert Departure Airport Names to Lowercase
+SELECT LOWER(Departure_Airport) AS Lowercase_Departure_Airport FROM Flights;
+
+-- 3. Concatenate Flight Number and Departure Airport
+SELECT CONCAT(Flight_Number, ' - ', Departure_Airport) AS Flight_Info FROM Flights;
+
+-- 4. Get Length of Flight Numbers
+SELECT Flight_Number, LENGTH(Flight_Number) AS Flight_Number_Length FROM Flights;
+
+-- 5. Get Length of Departure Airport Names
+SELECT Departure_Airport, LENGTH(Departure_Airport) AS Airport_Name_Length FROM Flights;
+
+-- 6. Extract Substring from Flight Number
+SELECT Flight_Number, SUBSTRING(Flight_Number, 3, 3) AS Flight_Substring FROM Flights; 
+-- Extracts characters from position 3
+
+-- 7. Find Flights with Flight Numbers Starting with 'AI'
+SELECT * FROM Flights WHERE Flight_Number LIKE 'AI%';
+
+-- 8. Find Flights with Departure Airports Containing 'Delhi'
+SELECT * FROM Flights WHERE Departure_Airport LIKE '%Delhi%';
+
+-- 9. Replace 'Delhi' with 'New Delhi' in Departure Airports
+SELECT Flight_Number, REPLACE(Departure_Airport, 'Delhi', 'New Delhi') AS Updated_Departure_Airport FROM Flights;
+
+-- 10. Find Flights with Flight Numbers Ending in '01'
+SELECT * FROM Flights WHERE Flight_Number LIKE '%01';
+
+-- 11. Count the Number of Flights with 'Boeing' in Aircraft Type
+SELECT COUNT(*) AS Boeing_Flight_Count FROM Flights WHERE Aircraft_Type LIKE '%Boeing%';
+
+-- 12. Find Flights with Arrival Airports Starting with 'M'
+SELECT * FROM Flights WHERE Arrival_Airport LIKE 'M%';
+
+-- 13. Get the First Character of Each Flight Number
+SELECT Flight_Number, LEFT(Flight_Number, 1) AS First_Character FROM Flights;
+
+-- 14. Get the Last Character of Each Arrival Airport Name
+SELECT Arrival_Airport, RIGHT(Arrival_Airport, 1) AS Last_Character FROM Flights;
+
+-- 15. Find Flights with Aircraft Types that are Exactly 10 Characters Long
+SELECT * FROM Flights WHERE LENGTH(Aircraft_Type) = 10;
+
+-- 16. Find Flights with Flight Numbers that are Not in Uppercase
+SELECT * FROM Flights WHERE BINARY Flight_Number != UPPER(Flight_Number);
+
+-- 17. Find Flights with Departure Airports that are Not in Lowercase
+SELECT * FROM Flights WHERE BINARY Departure_Airport != LOWER(Departure_Airport);
+
+-- 18. Concatenate Flight Number, Departure, and Arrival Airports
+SELECT CONCAT(Flight_Number, ' from ', Departure_Airport, ' to ', Arrival_Airport) AS Full_Flight_Info FROM Flights;
+
+-- 19. Find Flights with Aircraft Types that Contain 'A320'
+SELECT * FROM Flights WHERE Aircraft_Type LIKE '%A320%';
+
+-- 20. Get the Position of 'AI' in Flight Numbers
+SELECT Flight_Number, LOCATE('AI', Flight_Number) AS Position_of_AI FROM Flights;
