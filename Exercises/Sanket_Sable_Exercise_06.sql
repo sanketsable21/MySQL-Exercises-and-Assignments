@@ -1019,7 +1019,7 @@ SELECT (COUNT(*) / (SELECT COUNT(*) FROM Flights)) * 100 AS Percentage_On_Time
 FROM Flights WHERE Status = 'On Time';
 
 -- 12. Find the Average Flight Duration for Delayed Flights
-SELECT AVG(Flight_Duration) AS Average_Delayed_Flight_Duration FROM Flights WHERE Status = 'Delayed';
+SELECT AVG(Flight_Duration) AS Average_Delayed_Flight_Duration FROM Flights WHERE Status = 'Cancelled';
 
 -- 13. Count the Number of Flights for Each Aircraft Type
 SELECT Aircraft_Type, COUNT(*) AS Flight_Count 
