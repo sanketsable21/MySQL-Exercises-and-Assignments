@@ -980,3 +980,71 @@ SELECT * FROM Flights WHERE Aircraft_Type LIKE '%A320%';
 
 -- 20. Get the Position of 'AI' in Flight Numbers
 SELECT Flight_Number, LOCATE('AI', Flight_Number) AS Position_of_AI FROM Flights;
+
+
+-- Numeric Functions
+
+-- 1. Calculate the Average Flight Duration
+SELECT AVG(Flight_Duration) AS Average_Flight_Duration FROM Flights;
+
+-- 2. Calculate the Total Number of Seats Available
+SELECT SUM(Seats_Available) AS Total_Seats_Available FROM Flights;
+
+-- 3. Find the Longest Flight Duration
+SELECT MAX(Flight_Duration) AS Longest_Flight_Duration FROM Flights;
+
+-- 4. Find the Shortest Flight Duration
+SELECT MIN(Flight_Duration) AS Shortest_Flight_Duration FROM Flights;
+
+-- 5. Count the Total Number of Flights
+SELECT COUNT(*) AS Total_Flights FROM Flights;
+
+-- 6. Calculate the Average Number of Available Seats per Flight
+SELECT AVG(Seats_Available) AS Average_Seats_Per_Flight FROM Flights;
+
+-- 7. Find the Total Flight Duration for All Flights
+SELECT SUM(Flight_Duration) AS Total_Flight_Duration FROM Flights;
+
+-- 8. Count the Number of Flights with More Than 50 Seats Available
+SELECT COUNT(*) AS Flights_With_Over_50_Seats FROM Flights WHERE Seats_Available > 50;
+
+-- 9. Calculate the Average Flight Duration for Flights Departing from Delhi
+SELECT AVG(Flight_Duration) AS Average_Flight_Duration_Delhi FROM Flights WHERE Departure_Airport = 'Delhi (DEL)';
+
+-- 10. Find the Total Number of Flights to Mumbai
+SELECT COUNT(*) AS Total_Flights_To_Mumbai FROM Flights WHERE Arrival_Airport = 'Mumbai (BOM)';
+
+-- 11. Calculate the Percentage of Flights that are On Time
+SELECT (COUNT(*) / (SELECT COUNT(*) FROM Flights)) * 100 AS Percentage_On_Time 
+FROM Flights WHERE Status = 'On Time';
+
+-- 12. Find the Average Flight Duration for Delayed Flights
+SELECT AVG(Flight_Duration) AS Average_Delayed_Flight_Duration FROM Flights WHERE Status = 'Delayed';
+
+-- 13. Count the Number of Flights for Each Aircraft Type
+SELECT Aircraft_Type, COUNT(*) AS Flight_Count 
+FROM Flights 
+GROUP BY Aircraft_Type;
+
+-- 14. Calculate the Total Number of Seats Available for Flights to Chennai
+SELECT SUM(Seats_Available) AS Total_Seats_To_Chennai FROM Flights WHERE Arrival_Airport = 'Chennai (MAA)';
+
+-- 15. Find the Average Flight Duration for Flights Arriving in Kolkata
+SELECT AVG(Flight_Duration) AS Average_Flight_Duration_Kolkata FROM Flights WHERE Arrival_Airport = 'Kolkata (CCU)';
+
+-- 16. Find the Maximum Number of Available Seats on a Single Flight
+SELECT MAX(Seats_Available) AS Max_Seats_On_A_Flight FROM Flights;
+
+-- 17. Calculate the Total Number of Flights Departing from Each Airport
+SELECT Departure_Airport, COUNT(*) AS Total_Flights 
+FROM Flights 
+GROUP BY Departure_Airport;
+
+-- 18. Find the Average Number of Seats Available for Flights that are Cancelled
+SELECT AVG(Seats_Available) AS Average_Seats_Cancelled FROM Flights WHERE Status = 'Cancelled';
+
+-- 19. Calculate the Total Flight Duration for Flights with Status 'On Time'
+SELECT SUM(Flight_Duration) AS Total_On_Time_Flight_Duration FROM Flights WHERE Status = 'On Time';
+
+-- 20. Count the Number of Flights with a Duration Greater Than 180 Minutes
+SELECT COUNT(*) AS Flights_Over_3_Hours FROM Flights WHERE Flight_Duration > 180;
