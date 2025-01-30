@@ -936,7 +936,7 @@ SELECT Flight_Number, LENGTH(Flight_Number) AS Flight_Number_Length FROM Flights
 SELECT Departure_Airport, LENGTH(Departure_Airport) AS Airport_Name_Length FROM Flights;
 
 -- 6. Extract Substring from Flight Number
-SELECT Flight_Number, SUBSTRING(Flight_Number, 3, 3) AS Flight_Substring FROM Flights; -- Doubt -------------------------------------------------
+SELECT Flight_Number, SUBSTRING(Flight_Number, 3, 1) AS Flight_Substring FROM Flights; -- Doubt -------------------------------------------------
 -- Extracts characters from position 3
 
 -- 7. Find Flights with Flight Numbers Starting with 'AI'
@@ -970,7 +970,7 @@ SELECT * FROM Flights WHERE LENGTH(Aircraft_Type) = 10;
 SELECT * FROM Flights WHERE BINARY Flight_Number != UPPER(Flight_Number);
 
 -- 17. Find Flights with Departure Airports that are Not in Lowercase
-SELECT * FROM Flights WHERE BINARY Departure_Airport != LOWER(Departure_Airport);
+SELECT * FROM Flights WHERE BINARY FLIGHT_STATUS != LOWER(FLIGHT_STATUS);
 
 -- 18. Concatenate Flight Number, Departure, and Arrival Airports
 SELECT CONCAT(Flight_Number, ' from ', Departure_Airport, ' to ', Arrival_Airport) AS Full_Flight_Info FROM Flights;
