@@ -32,6 +32,9 @@ TRUNCATE BOOKS;
 
 SELECT * FROM BOOKS;
 
+ALTER TABLE BOOKS
+ADD COLUMN BOOK_PRICE INT DEFAULT 399;
+
 
 -- --------------------------------------------------------------------TABLE 02----------------------------------------------------------------------
 
@@ -65,6 +68,9 @@ TRUNCATE MEMBERS;
 
 SELECT * FROM MEMBERS;
 
+ALTER TABLE MEMBERS
+ADD COLUMN MEMBERSHIP_DURATION VARCHAR(20) DEFAULT '4 MONTHS';
+
 
 -- -------------------------------------------------------------TABLE 03-----------------------------------------------------------------------
 
@@ -95,6 +101,9 @@ DROP TABLE AUTHORS;
 TRUNCATE AUTHORS;
 
 SELECT * FROM AUTHORS;
+
+ALTER TABLE AUTHORS
+ADD COLUMN EXPERIENCE VARCHAR(30) DEFAULT '11 YEARS';
 
 
 -- --------------------------------------------------------TABLE 04-------------------------------------------------------------
@@ -130,6 +139,9 @@ TRUNCATE BORROW_RECORDS;
 
 SELECT * FROM BORROW_RECORDS;
 
+ALTER TABLE BORROW_RECORDS
+ADD COLUMN RETURN_DATE DATE NULL;
+
 
 -- ---------------------------------------------------------------TABLE 05-------------------------------------------------------
 
@@ -162,6 +174,9 @@ TRUNCATE STAFF;
 
 SELECT * FROM STAFF;
 
+ALTER TABLE STAFF
+ADD COLUMN SALARY VARCHAR(20) DEFAULT '15000';
+
 
 -- -----------------------------------------------------------TABLE 06---------------------------------------------------------------
 
@@ -191,6 +206,9 @@ TRUNCATE CATEGORIES;
 
 SELECT * FROM CATEGORIES;
 
+ALTER TABLE CATEGORIES
+ADD COLUMN TOTAL_EDITION INT DEFAULT 14;
+
 -- -----------------------------------------------------TABLE 07-----------------------------------------------------
 
 -- PUBLISHERS TABLE
@@ -219,6 +237,9 @@ DROP TABLE PUBLISHERS;
 TRUNCATE PUBLISHERS;
 
 SELECT * FROM PUBLISHERS;
+
+ALTER TABLE PUBLISHERS
+ADD COLUMN PUBLISHER_ADDRESS VARCHAR(10) DEFAULT 'MUMBAI';
 
 
 -- --------------------------------------------------------------TABLE 08------------------------------------------------------
@@ -254,6 +275,11 @@ TRUNCATE FINES;
 
 SELECT * FROM FINES;
 
+ALTER TABLE FINES
+ADD COLUMN STATUS VARCHAR(20) DEFAULT 'PAID';
+
+ALTER TABLE FINES 
+DROP COLUMN PAID;
 
 -- -----------------------------------------------------------------TABLE 09---------------------------------------------------
 
@@ -283,6 +309,9 @@ DROP TABLE LOCATIONS;
 TRUNCATE LOCATIONS;
 
 SELECT * FROM LOCATIONS;
+
+ALTER TABLE LOCATIONS
+ADD COLUMN CITY VARCHAR(30) DEFAULT 'MUMBAI';
 
 
 -- ---------------------------------------------------------------TABLE 10-----------------------------------------------
@@ -315,3 +344,6 @@ DROP TABLE TRANSACTIONS;
 TRUNCATE TRANSACTIONS;
 
 SELECT * FROM TRANSACTIONS;
+
+ALTER TABLE TRANSACTIONS
+ADD COLUMN BALANCE VARCHAR(30) DEFAULT 'NONE';
