@@ -28,12 +28,21 @@ VALUES
 
 DROP TABLE BOOKS;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 TRUNCATE BOOKS;
 
 SELECT * FROM BOOKS;
 
 ALTER TABLE BOOKS
 ADD COLUMN BOOK_PRICE INT DEFAULT 399;
+
+UPDATE BOOKS 
+SET TITLE = 'THE MILLIONAIRE NEXT DOOR'
+WHERE BOOK_ID = 8;
+
+DELETE FROM BOOKS 
+WHERE BOOK_ID = 9;
 
 
 -- --------------------------------------------------------------------TABLE 02----------------------------------------------------------------------
@@ -71,6 +80,15 @@ SELECT * FROM MEMBERS;
 ALTER TABLE MEMBERS
 ADD COLUMN MEMBERSHIP_DURATION VARCHAR(20) DEFAULT '4 MONTHS';
 
+SET SQL_SAFE_UPDATES = 0; 
+
+UPDATE MEMBERS 
+SET FULL_NAME = 'YASH PAWAR' 
+WHERE MEMBER_ID = 3;
+
+DELETE FROM MEMBERS
+WHERE EMAIL LIKE '%OTEK%';
+
 
 -- -------------------------------------------------------------TABLE 03-----------------------------------------------------------------------
 
@@ -104,6 +122,13 @@ SELECT * FROM AUTHORS;
 
 ALTER TABLE AUTHORS
 ADD COLUMN EXPERIENCE VARCHAR(30) DEFAULT '11 YEARS';
+
+UPDATE AUTHORS
+SET AUTHOR_NAME = 'YASH'
+WHERE BOOK_ID = 3;
+
+DELETE FROM AUTHORS 
+WHERE BOOK_ID = 3;
 
 
 -- --------------------------------------------------------TABLE 04-------------------------------------------------------------
@@ -142,6 +167,13 @@ SELECT * FROM BORROW_RECORDS;
 ALTER TABLE BORROW_RECORDS
 ADD COLUMN RETURN_DATE DATE NULL;
 
+UPDATE BORROW_RECORDS
+SET DUE_DATE = '03 APRIL 2025'
+WHERE RECORD_ID = 7;
+
+DELETE FROM BORROW_RECORDS
+WHERE DUE_DATE LIKE '%PRI%';
+
 
 -- ---------------------------------------------------------------TABLE 05-------------------------------------------------------
 
@@ -176,6 +208,10 @@ SELECT * FROM STAFF;
 
 ALTER TABLE STAFF
 ADD COLUMN SALARY VARCHAR(20) DEFAULT '15000';
+
+UPDATE STAFF
+SET FULL_NAME = 'RAJAT GOKHALE', EMAIL = 'rajatgokhale123@gmail.com'
+WHERE STAFF_ID = 4;
 
 
 -- -----------------------------------------------------------TABLE 06---------------------------------------------------------------
