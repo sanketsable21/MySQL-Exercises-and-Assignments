@@ -94,7 +94,7 @@ SELECT STUDENT.ID, STUDENT_NAME, COURSE_NAME
 FROM STUDENT, COURSE
 WHERE STUDENT.ID = COURSE.ID;
 
--- Cross Join: (also known as a Cartesian Join or Cartesian Product Join)                             -- this query is not working
+-- Cross Join: (also known as a Cartesian Join or Cartesian Product Join)                           
 -- A Cross Join retrieves the Cartesian product of two tables, meaning every row from the first table is
 -- combined with every row from the second table.
 -- Retrieve the Cartesian product of 'student' and 'course' tables
