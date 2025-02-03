@@ -100,7 +100,7 @@ WHERE STUDENT.ID = COURSE.ID;
 -- Retrieve the Cartesian product of 'student' and 'course' tables
 SELECT STUDENT.ID, STUDENT_NAME, COURSE_NAME
 FROM STUDENT
-CROSS JOIN COURSE;
+CROSS JOIN COURSE;
 
 -- Table-1
 -- Create the faculty table to store information about faculty members
