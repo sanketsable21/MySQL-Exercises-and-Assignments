@@ -453,4 +453,3 @@ These operators cover a wide range of functionality, from basic arithmetic to ad
 string manipulations, enabling efficient data handling and querying in MySQL.
 
 */
-*/
