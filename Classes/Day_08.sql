@@ -138,6 +138,11 @@ CREATE TABLE department (
   FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) -- Establishing relationship with faculty
 );
 
+SELECT T1.department_id, department_name, student_name, enrollment_year, amount
+FROM department as T1
+INNER JOIN students as T2 on T1.department_id = T2.department_id
+INNER JOIN salary as T3 on T2.department_id = T3.department_id; 
+
 -- Insert sample data into the department table
 INSERT INTO department (department_id, department_name, department_description, faculty_id, department_head, department_location) VALUES
 (1, 'Department of Physics', 'Study of matter and energy', 1, 'Dr. Emily White', 'Room 101'),
@@ -175,17 +180,18 @@ CREATE TABLE salary (
   salary_id INT PRIMARY KEY, -- Unique identifier for each salary record
   faculty_id INT, -- Foreign key referencing the faculty
   amount DECIMAL(10, 2), -- Salary amount
+  department_id int,
   payment_date DATE, -- Date of salary payment
   FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id) -- Establishing relationship with faculty
 );
 
 -- Insert sample data into the salary table
-INSERT INTO salary (salary_id, faculty_id, amount, payment_date) VALUES
-(1, 1, 75000.00, '2023-01-15'),
-(2, 2, 80000.00, '2023-01-15'),
-(3, 3, 70000.00, '2023-01-15'),
-(4, 4, 72000.00, '2023-01-15'),
-(5, 5, 68000.00, '2023-01-15');
+INSERT INTO salary (salary_id, faculty_id, amount, department_id, payment_date) VALUES
+(1, 1, 75000.00, 1, '2023-01-15'),
+(2, 2, 80000.00, 2, '2023-01-15'),
+(3, 3, 70000.00, 3, '2023-01-15'),
+(4, 4, 72000.00, 4, '2023-01-15'),
+(5, 5, 68000.00, 5, '2023-01-15');
 
 SELECT students.student_id, student_name, student_email, marks_obtained, semester
 FROM students
@@ -242,3 +248,5 @@ FROM SALARY S
 INNER JOIN FACULTY F ON S.FACULTY_ID = F.FACULTY_ID
 INNER JOIN DEPARTMENT D ON F.FACULTY_ID = D.FACULTY_ID
 INNER JOIN STUDENTS S1 ON D.DEPARTMENT_ID = ST.DEPARTMENT_ID;
+
+thdhdhnt
