@@ -37,7 +37,7 @@ INSERT INTO COURSE VALUES
 SELECT * FROM COURSE;	
 
 -- INNER JOIN (ALSO KNOWN AS SIMPLE JOIN / EQUI JOIN):
--- RETRIEVES RECORDS THAT HAVE MATCHING VALUES IN BOTH TABLES INVOLVED IN THW JOIN.
+-- RETRIEVES RECORDS THAT HAVE MATCHING VALUES IN BOTH TABLES INVOLVED IN THE JOIN.
 -- RETRIEVE RECORDS WITH MATCHING IDS FROM BOTH TABLES
 SELECT STUDENT.ID, STUDENT_NAME, COURSE_NAME
 FROM STUDENT
@@ -122,6 +122,10 @@ INSERT INTO faculty (faculty_id, faculty_name, faculty_description, dean, facult
 (5, 'Faculty of Education', 'Dedicated to teacher training and education studies', 'Dr. Eva Davis', 'Building E', 'eva.davis@example.com');
 
 
+SELECT faculty.faculty_id, faculty_name, department_name
+FROM faculty
+INNER JOIN department ON faculty.faculty_id = department.department_id;
+
 -- Table-2
 -- Create the department table to store information about departments within faculties
 CREATE TABLE department (
@@ -182,6 +186,10 @@ INSERT INTO salary (salary_id, faculty_id, amount, payment_date) VALUES
 (3, 3, 70000.00, '2023-01-15'),
 (4, 4, 72000.00, '2023-01-15'),
 (5, 5, 68000.00, '2023-01-15');
+
+SELECT students.student_id, student_name, student_email, marks_obtained, semester
+FROM students
+INNER JOIN marks on students.student_id = marks.student_id;
 
 -- Table-5
 -- Create the marks table to store marks obtained by students
