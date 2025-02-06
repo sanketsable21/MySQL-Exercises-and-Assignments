@@ -164,6 +164,21 @@ FROM students as T1
 RIGHT JOIN department as T2 on T1.department_id = T2.department_id
 RIGHT JOIN salary as T3 on T2.department_id = T3.department_id;
 
+-- FULL JOIN
+SELECT department.department_id, department_name, student_name
+FROM department
+LEFT JOIN students ON department.department_id = students.department_id
+UNION
+SELECT department.department_id, department_name, student_name
+FROM department
+RIGHT JOIN students ON department.department_id = students.department_id; 
+
+-- LEFT EXCLUSIVE JOIN
+SELECT department.department_id, student_name, department_name
+FROM department
+LEFT JOIN students ON department.department_id = students.department_id
+WHERE students.department_id is NULL;
+
 -- Insert sample data into the department table
 INSERT INTO department (department_id, department_name, department_description, faculty_id, department_head, department_location) VALUES
 (1, 'Department of Physics', 'Study of matter and energy', 1, 'Dr. Emily White', 'Room 101'),
