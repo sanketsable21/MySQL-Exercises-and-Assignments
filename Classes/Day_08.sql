@@ -4,6 +4,7 @@ CREATE DATABASE DEMOJOINS;
 -- USE THE NEWLY CREATE DATABASE FOR SUBSEQUENT OPERATIONS
 USE DEMOJOINS;
 
+drop database demojoins;
 -- CREATE A TABLE NAMED 'STUDENTS' WITH AN ID AND NAME
 CREATE TABLE STUDENT(
 	ID INT PRIMARY KEY, -- 'ID' IS THE PRIMARY KEY AND MUST BE UNIQUE
@@ -142,6 +143,26 @@ SELECT T1.department_id, department_name, student_name, enrollment_year, amount
 FROM department as T1
 INNER JOIN students as T2 on T1.department_id = T2.department_id
 INNER JOIN salary as T3 on T2.department_id = T3.department_id; 
+
+-- LEFT JOIN
+SELECT department.department_id, department_name, student_name
+FROM department
+LEFT JOIN students on department.department_id = students.department_id;
+
+SELECT T1.department_id, department_name, student_name, amount
+FROM department as T1
+LEFT JOIN students as T2 on T1.department_id = T2.department_id
+LEFT JOIN salary as T3 on T2.department_id = T3.department_id;
+
+-- RIGHT JOIN
+SELECT students.department_id, student_name, department_name
+FROM students
+RIGHT JOIN department on students.department_id = department.department_id;
+
+SELECT T1.department_id, student_name, department_name, amount
+FROM students as T1
+RIGHT JOIN department as T2 on T1.department_id = T2.department_id
+RIGHT JOIN salary as T3 on T2.department_id = T3.department_id;
 
 -- Insert sample data into the department table
 INSERT INTO department (department_id, department_name, department_description, faculty_id, department_head, department_location) VALUES
