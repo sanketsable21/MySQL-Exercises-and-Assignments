@@ -177,7 +177,23 @@ RIGHT JOIN students ON department.department_id = students.department_id;
 SELECT department.department_id, student_name, department_name
 FROM department
 LEFT JOIN students ON department.department_id = students.department_id
-WHERE students.department_id is NULL;
+WHERE students.department_id is NULL; 
+
+-- RIGHT EXCLUSIVE JOIN
+SELECT students.department_id, department_name, student_name
+FROM students
+RIGHT JOIN department ON students.department_id = department.department_id
+WHERE department.department_id is NULL; 
+
+-- CROSS JOIN 
+SELECT department.department_id, department_name, student_name
+FROM department
+CROSS JOIN students;
+
+-- SELF JOIN
+SELECT department.department_id, department_name, student_name -- --------------------------------------------------------------I HAVE A DOUBT IN THIS QUERY
+FROM department, student
+where department.department_id = student.department_id;
 
 -- Insert sample data into the department table
 INSERT INTO department (department_id, department_name, department_description, faculty_id, department_head, department_location) VALUES
