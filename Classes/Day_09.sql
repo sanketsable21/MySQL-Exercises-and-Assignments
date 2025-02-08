@@ -121,27 +121,27 @@ Examples:
     
 2. Multiple-row subquery:
 
-Purpose: To find employees who work in departments with a budget greater than $100,000.
+	Purpose: To find employees who work in departments with a budget greater than $100,000.
 
-SELECT EmployeeID, Name
-FROM Employees
-WHERE DepartmentID IN (SELECT DepartmentID FROM Departments WHERE Budget > 100000);
+	SELECT EmployeeID, Name
+	FROM Employees
+	WHERE DepartmentID IN (SELECT DepartmentID FROM Departments WHERE Budget > 100000);
 
 3. Scalar subquery:
 
-Purpose: To find the name of the employee with the highest salary.
+	Purpose: To find the name of the employee with the highest salary.
 
-SELECT Name
-FROM Employees
-WHERE Salary = (SELECT MAX(Salary) FROM Employees);
+	SELECT Name
+	FROM Employees
+	WHERE Salary = (SELECT MAX(Salary) FROM Employees);
 
 4. Correlated subquery:
 
-Purpose: To find employees whose salary is above the average salary of their respective departments.
+	Purpose: To find employees whose salary is above the average salary of their respective departments.
 
-SELECT e.EmployeeID, e.Name
-FROM Employees e
-WHERE e.Salary > (SELECT AVG(Salary) FROM Employees WHERE DepartmentID = e.DepartmentID);
+	SELECT e.EmployeeID, e.Name
+	FROM Employees e
+	WHERE e.Salary > (SELECT AVG(Salary) FROM Employees WHERE DepartmentID = e.DepartmentID);
 
 subqueries are a powerful feature in SQL that allow for more complex and dynamic queries by enabling the use 
 of the results of one query within another. They can help simplify SQL statements and make them more readable 
