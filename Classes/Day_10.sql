@@ -259,6 +259,53 @@ INSERT INTO salary (salary_id, faculty_id, amount, payment_date) VALUES
 (4, 4, 72000.00, '2023-01-15'),
 (5, 5, 68000.00, '2023-01-15');
 
+SELECT * FROM salary;
+
+-- 1st Query
+SELECT payment_date
+FROM salary
+WHERE amount IN(
+	SELECT amount 
+    FROM salary
+    WHERE amount = 72000
+);
+
+-- 2nd Query
+SELECT department_id
+FROM salary
+WHERE salary_id IN(
+	SELECT faculty_id
+    FROM salary
+    WHERE faculty_id > 2 and faculty_id < 4
+);
+
+-- 3rd Query
+SELECT salary_id
+FROM salary
+WHERE amount IN(
+	SELECT amount
+    FROM salary
+    WHERE amount LIKE '%72000%'
+);
+
+-- 4th Query
+SELECT faculty_id
+FROM salary
+WHERE department_id IN(
+	SELECT salary_id
+    FROM salary
+    WHERE salary_id > 4 and salary_id <= 5
+);
+
+-- 5th Query
+SELECT amount 
+FROM salary
+WHERE payment_date IN(
+	SELECT payment_date
+    FROM salary
+    WHERE payment_date = '2023-01-15'
+);    
+
 -- Table-5
 -- Create the marks table to store marks obtained by students
 CREATE TABLE marks (
