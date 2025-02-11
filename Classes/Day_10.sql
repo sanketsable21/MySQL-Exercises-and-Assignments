@@ -325,3 +325,33 @@ INSERT INTO marks (marks_id, student_id, subject_name, marks_obtained, semester)
 (4, 3, 'Physics', 92, 1),
 (5, 4, 'Civil Engineering', 75, 2),
 (6, 5, 'Business Management', 80, 1);
+
+SELECT * FROM marks;
+
+-- 1st Query
+SELECT subject_name 
+FROM marks
+WHERE marks_obtained IN(
+	SELECT marks_obtained
+    FROM marks
+    WHERE marks_id = 5
+);
+
+-- 2nd Query
+SELECT marks_obtained
+FROM marks
+WHERE semester = (
+	SELECT semester
+    FROM marks 
+    WHERE marks_id = 1 
+);
+
+-- 3rd Query
+SELECT student_id
+FROM marks
+WHERE semester = (
+	SELECT semester 
+    FROM marks
+    WHERE marks_id = 1
+);
+
