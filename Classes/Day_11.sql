@@ -149,3 +149,52 @@ DELIMITER ;
 
 -- Use the Function
 SELECT discounted_price(100, 20) AS final_price; -- Returns 80.00
+
+
+
+
+
+-- This is an error
+
+-- This function calculates the factorial of a number.
+DELIMITER //
+CREATE FUNCTION factorial (n INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+	DECLARE result INT DEFAULT 1;
+    WHILE n > 1 DO
+		SET result = result * n;
+        SET n = n - 1;
+	END WHILE;
+	RETURN result;
+END //
+DELIMITER ;
+
+-- Use the Function
+SELECT factorial(5) AS factorial_of_5; -- return 120
+        
+        
+       -- above query is an error 
+        
+        
+        
+
+        
+-- This function calculates the factorial of a number.
+DELIMITER //
+CREATE FUNCTION fact (n INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+	DECLARE result INT DEFAULT 1;
+    WHILE n > 1 DO
+		SET result = result * n;
+        SET n = n - 1;
+	END WHILE;
+	RETURN result;
+END //
+DELIMITER ;
+
+-- Use the Function
+SELECT fact(5) AS factorial_of_5; -- return 120
