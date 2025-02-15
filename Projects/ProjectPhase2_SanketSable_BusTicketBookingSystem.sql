@@ -18,8 +18,6 @@ CREATE TABLE Users(
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Select for show data
-SELECT * FROM Users;
 
 -- Drop table
 DROP TABLE Users;
@@ -39,10 +37,56 @@ VALUES
 	('samadhangadhe12','samadhangadhe12','samadhangadhe1212@gmail.com','9356832018'),
 	('pavangadekar14','pavangadekar14','pavangadekar1412@gmail.com','7878464338');
     
+    
+-- Select for show data
+SELECT * FROM Users;
+
+    
 -- Select column from table
 SELECT username, email, phone FROM Users;
 
+-- Select query using where clause
+SELECT * FROM Users WHERE created_at = '2025-02-14 20:10:04';
 
+
+-- Add new column
+ALTER TABLE Users
+ADD COLUMN gender VARCHAR(20) DEFAULT 'Male';
+
+-- Drop column
+ALTER TABLE Users
+DROP COLUMN gender;
+
+
+SET SQL_SAFE_UPDATES = 0;
+SET FOREIGN_KEY_CHECKS = 0;
+
+
+-- Delete a specific record
+DELETE FROM Users
+WHERE phone = '9356832018';
+
+-- Delete records based on condition
+DELETE FROM Users
+WHERE password = 'rohitthorat28';
+
+
+-- Rename table
+ALTER TABLE Users RENAME TO User;
+
+-- Again rename table
+ALTER TABLE User RENAME TO Users;
+
+
+-- Update a specific record 
+UPDATE Users 
+SET phone = '9890891719'
+WHERE username = 'swarupchikane19';
+
+-- update records
+UPDATE Users
+SET username = 'bhausahebpatil12', password = 'bhausahebpatil12', email = 'bhausahebpatil1209@gmail.com'
+WHERE phone = '9890891719';
 
 
 -- Table 02---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,8 +101,6 @@ CREATE TABLE Buses(
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Select for show data
-SELECT * FROM Buses;
 
 -- Drop table
 DROP TABLE Buses;
@@ -76,6 +118,35 @@ VALUES
 	('MH17UV1357','Mountain Explorer','50','Mountain Bus Lines'),
 	('MH18OP8642','City Commuter','38','Cityline Buses'),
 	('MH19RT9753','Metro Runner','52','Metro Travels');
+    
+
+-- Select for show data
+SELECT * FROM Buses;
+
+
+-- Select Buses with capacity greater than certain amount
+SELECT * FROM Buses WHERE capacity > 45;
+
+-- Select Users created_at in a date
+SELECT * FROM Buses WHERE DATE(created_at) = '2025-02-14';
+
+
+-- Modify an existing column
+ALTER TABLE Buses 
+MODIFY COLUMN capacity DECIMAL(10,2);
+
+-- Rename a column
+ALTER TABLE Buses 
+CHANGE COLUMN capacity bus_capacity VARCHAR(255);
+
+
+-- Delete record using condition
+DELETE FROM Buses 
+WHERE bus_capacity > 55.00;
+
+
+
+    
 
 -- Table 03---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create table
