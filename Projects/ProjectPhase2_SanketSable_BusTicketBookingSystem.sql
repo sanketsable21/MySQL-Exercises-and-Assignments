@@ -144,9 +144,27 @@ CHANGE COLUMN capacity bus_capacity VARCHAR(255);
 DELETE FROM Buses 
 WHERE bus_capacity > 55.00;
 
+-- Delete record using condition
+DELETE FROM Buses
+WHERE bus_number LIKE '%24%';
 
 
-    
+-- Rename the bus_id column
+ALTER TABLE Buses RENAME COLUMN bus_id to id;
+
+-- Rename the bus_name column
+ALTER TABLE Buses RENAME COLUMN bus_name to name;
+
+
+-- Update capacity for all bus
+UPDATE Buses 
+SET bus_capacity = bus_capacity * 1.5
+WHERE id BETWEEN 1 AND 10;
+
+UPDATE Buses
+SET bus_capacity = 75
+WHERE id IN (3, 5);
+
 
 -- Table 03---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create table
@@ -158,9 +176,6 @@ CREATE TABLE Routes(
 	estimated_time TIME,
 	fare DECIMAL(10,2)
 );
-
--- Select for show data
-SELECT * FROM Routes;
 
 -- Drop table
 DROP TABLE Routes;
@@ -178,6 +193,27 @@ VALUES
 	('Pune','Lonavala','65','01:30:00','150'),
 	('Mumbai','Goa','600','10:00:00','1200'),
 	('Mumbai','Surat','275','06:30:00','800');
+
+
+-- Select for show data
+SELECT * FROM Routes;
+
+
+-- Select routes order by estimated_time in descending order
+SELECT * FROM Routes ORDER BY estimated_time DESC;
+
+-- Select routes where fare in various values
+SELECT * FROM Routes WHERE FARE IN(1200, 500, 100);
+
+
+-- Alter table routes set fare default 1
+ALTER TABLE Routes 
+ALTER COLUMN fare SET DEFAULT 1;
+
+-- Alter table routes add column with default value
+ALTER TABLE Routes 
+ADD COLUMN country VARCHAR(255) DEFAULT 'INDIA';
+
 
 -- Table 04---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create table
