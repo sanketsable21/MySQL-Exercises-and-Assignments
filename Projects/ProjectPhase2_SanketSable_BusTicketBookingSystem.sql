@@ -258,9 +258,6 @@ CREATE TABLE Trips(
     FOREIGN KEY(route_id) REFERENCES Routes(route_id)
 );
 
--- Select for show data
-SELECT * FROM Trips;
-
 -- Drop table
 DROP TABLE Trips;
 
@@ -277,6 +274,39 @@ VALUES
 	(8, 8, 36),
 	(9, 9, 46),
 	(10, 10, 37);
+    
+    
+-- Select for show data
+SELECT * FROM Trips;
+
+
+-- Select query using between function
+SELECT * FROM Trips 
+WHERE available_seats BETWEEN 40 AND 50;
+
+-- Count total trips using departure time
+SELECT departure_time, COUNT(*) AS Total_Trips FROM Trips GROUP BY departure_time;
+
+
+-- Modify column
+ALTER TABLE Trips 
+MODIFY COLUMN departure_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+-- Set default value of column 
+ALTER TABLE Trips 
+ALTER COLUMN available_seats SET DEFAULT 30;
+
+
+-- Delete record from table where seats is greater than 40
+DELETE FROM Trips 
+WHERE available_seats < 40;
+
+-- Delete record using condition
+DELETE FROM Trips 
+WHERE route_id = 5 AND available_seats = 47;
+
+
+
 
 -- Table 05---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create table
