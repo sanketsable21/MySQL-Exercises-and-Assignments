@@ -150,3 +150,14 @@ WITH EmployeeStatusCounts AS (
 )
 SELECT * FROM EmployeeStatusCounts;
 
+-- Step 7: Use a CTE to Delete Inactive Employees
+WITH InactiveEmployees AS (
+	SELECT id
+    FROM Employee
+    WHERE active = 0
+)
+DELETE FROM Employee
+WHERE id IN (SELECT id FROM InactiveEmployees);
+
+SET SQL_SAFE_UPDATES = 0;
+
