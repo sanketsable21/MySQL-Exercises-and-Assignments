@@ -104,6 +104,48 @@ DROP VIEW IF EXISTS AvailableProducts;
 DROP VIEW IF EXISTS AvailableProductsWithCategory;
 
 
+-- Example 3: Order Management System
+-- Step 1: Create the Orders Table
+CREATE TABLE Orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    order_date DATE NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES Products(id)
+);
+
+-- Step 2: Insert Sample Data into Orders
+INSERT INTO Orders (customer_name, product_id, quantity, order_date) VALUES
+('Alice', 1, 1, '2023-10-01'),
+('Bob', 2, 2, '2023-10-02'),
+('Charlie', 3, 1, '2023-10-03'),
+('David', 1, 3, '2023-10-04');
+
+-- Step 3: Create a View for Order Summary
+CREATE VIEW OrderSummary AS
+SELECT o.id, o.customer_name, p.name AS product_name, o.quantity, o.order_date
+FROM Orders o
+JOIN Products p ON o.product_id = p.id;
+
+-- Step 4: Use the View
+SELECT * FROM OrderSummary;
+
+-- Step 5: Update the View to Include Total Price
+CREATE OR REPLACE VIEW OrderSummaryWithTotal AS
+SELECT o.id, o.customer_name, p.name AS product_name, o.quantity, o.order_date,
+       (o.quantity * p.price) AS total_price
+FROM Orders o
+JOIN Products p ON o.product_id = p.id;
+
+-- Step 6: Use the Updated View
+SELECT * FROM OrderSummaryWithTotal;
+
+-- Step 7: Delete the Views
+DROP VIEW IF EXISTS OrderSummary;
+DROP VIEW IF EXISTS OrderSummaryWithTotal;
+
+
 /*
 2. Common Table Expressions (CTE)
 Definition:
@@ -161,3 +203,88 @@ WHERE id IN (SELECT id FROM InactiveEmployees);
 
 SET SQL_SAFE_UPDATES = 0;
 
+-- Example 2: Product Management System with CTE
+-- Step 3: Use a CTE to Get Available Products
+WITH AvailableProducts AS (
+    SELECT id, name, price, stock
+    FROM Products
+    WHERE stock > 0
+)
+SELECT * FROM AvailableProducts;
+
+-- Step 4: Use a CTE to Calculate Total Inventory Value
+WITH InventoryValue AS (
+    SELECT SUM(price * stock) AS total_value
+    FROM Products
+)
+SELECT * FROM InventoryValue;
+
+-- Step 5: Use a CTE to Get Products Below a Certain Stock Level
+WITH LowStockProducts AS (
+    SELECT id, name, stock
+    FROM Products
+    WHERE stock < 5
+)
+SELECT * FROM LowStockProducts;
+
+-- Step 6: Use a CTE to Get Products by Category
+WITH ProductsByCategory AS (
+    SELECT category, COUNT(*) AS count
+    FROM Products
+    GROUP BY category
+)
+SELECT * FROM ProductsByCategory;
+
+-- Step 7: Use a CTE to Delete Products with Zero Stock
+WITH OutOfStockProducts AS (
+    SELECT id
+    FROM Products
+    WHERE stock = 0
+)
+DELETE FROM Products
+WHERE id IN (SELECT id FROM OutOfStockProducts);
+
+
+-- Example 3: Order Management System with CTE
+-- Step 3: Use a CTE to Get Order Summary
+WITH OrderSummary AS (
+    SELECT o.id, o.customer_name, p.name AS product_name, o.quantity, o.order_date
+    FROM Orders o
+    JOIN Products p ON o.product_id = p.id
+)
+SELECT * FROM OrderSummary;
+
+-- Step 4: Use a CTE to Calculate Total Sales by Product
+WITH TotalSales AS (
+    SELECT p.name AS product_name, SUM(o.quantity) AS total_quantity
+    FROM Orders o
+    JOIN Products p ON o.product_id = p.id
+    GROUP BY p.name
+)
+SELECT * FROM TotalSales;
+
+-- Step 5: Use a CTE to Get Orders by Customer
+WITH OrdersByCustomer AS (
+    SELECT customer_name, COUNT(*) AS order_count
+    FROM Orders
+    GROUP BY customer_name
+)
+SELECT * FROM OrdersByCustomer;
+
+-- Step 6: Use a CTE to Get Orders with Total Amounts
+WITH OrderAmounts AS (
+    SELECT o.id, o.customer_name, SUM(p.price * o.quantity) AS total_amount
+    FROM Orders o
+    JOIN Products p ON o.product_id = p.id
+    GROUP BY o.id, o.customer_name
+)
+SELECT * FROM OrderAmounts;
+
+-- Step 7: Use a CTE to Delete Orders Older Than a Certain Date
+WITH OldOrders AS (
+    SELECT id
+    FROM Orders
+    WHERE order_date < '2023-01-01'
+)
+DELETE FROM Orders
+WHERE id IN (SELECT id FROM OldOrders);
