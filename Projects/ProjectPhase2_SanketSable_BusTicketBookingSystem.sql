@@ -215,6 +215,35 @@ ALTER TABLE Routes
 ADD COLUMN country VARCHAR(255) DEFAULT 'INDIA';
 
 
+-- Delete record using AND operator
+DELETE FROM Routes 
+WHERE source = 'Dombivali' AND fare = '600';
+
+-- Delete record where fare is greater than a value
+DELETE FROM Routes 
+WHERE fare >= 1200;
+
+
+-- Rename column name
+ALTER TABLE Routes 
+RENAME COLUMN route_id to id; 
+
+-- Rename column name
+ALTER TABLE Routes 
+RENAME COLUMN id TO route_id;
+
+
+-- Update Route using source
+UPDATE Routes
+SET estimated_time = '01:50:30'
+WHERE source = 'Mumbai';
+
+-- Update Route using id
+UPDATE Routes
+SET distance = '35' AND fare = '100'
+WHERE id = 8;
+
+
 -- Table 04---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create table
 CREATE TABLE Trips(
