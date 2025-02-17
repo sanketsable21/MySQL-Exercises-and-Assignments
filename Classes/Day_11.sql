@@ -198,3 +198,181 @@ DELIMITER ;
 
 -- Use the Function
 SELECT fact(5) AS factorial_of_5; -- return 120
+
+-- This function checks if a string is a palindrome.
+DELIMITER //
+
+CREATE FUNCTION is_palindrome(str VARCHAR(255))
+RETURNS BOOLEAN
+DETERMINISTIC
+BEGIN
+    RETURN str = REVERSE(str);
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT is_palindrome('madam') AS result;  -- Returns 1 (true)
+SELECT is_palindrome('hello') AS result;  -- Returns 0 (false)
+
+
+-- This function extracts a substring from a string based on the start position and length.
+DELIMITER //
+
+CREATE FUNCTION SubstringFunction(str VARCHAR(255), start INT, length INT)
+RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+    RETURN SUBSTRING(str, start, length);
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT SubstringFunction('Hello World', 1, 5) AS substring;  -- Returns 'Hello'
+
+
+-- This function returns the square of a number.
+DELIMITER //
+
+CREATE FUNCTION SquareNumber(num DECIMAL(10,2))
+RETURNS DECIMAL(10,2)
+BEGIN
+    RETURN num * num;
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT SquareNumber(4) AS square;  -- Returns 16.00
+
+
+-- This function checks if a password is strong based on certain criteria.
+DELIMITER //
+
+CREATE FUNCTION IsStrongPassword(password VARCHAR(255)) 
+RETURNS BOOLEAN
+BEGIN
+    DECLARE strong BOOLEAN;
+    SET strong = password REGEXP '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$';
+    RETURN strong;
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT IsStrongPassword('MyP@ssw0rd') AS result;  -- Returns 1 (true)
+SELECT IsStrongPassword('mypassword') AS result;  -- Returns 0 (false)
+
+
+-- This function validates an IP address format.
+DELIMITER //
+
+CREATE FUNCTION IsValidIP(ip VARCHAR(255))
+RETURNS BOOLEAN
+BEGIN
+    DECLARE valid BOOLEAN;
+    SET valid = ip REGEXP '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$';
+    RETURN valid;
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT IsValidIP('192.168.1.1') AS result;  -- Returns 1 (true)
+SELECT IsValidIP('256.1.1.1') AS result;  -- Returns 0 (false)
+
+
+-- This function validates a credit card number format.
+DELIMITER //
+
+CREATE FUNCTION IsValidCreditCard(card_number VARCHAR(255))
+RETURNS BOOLEAN
+BEGIN
+    DECLARE valid BOOLEAN;
+    SET valid = card_number REGEXP '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13})$';
+    RETURN valid;
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT IsValidCreditCard('4111111111111111') AS result;  -- Returns 1 (true)
+SELECT IsValidCreditCard('411111111111111') AS result;  -- Returns 0 (false)
+
+
+-- This function validates a zip code format.
+DELIMITER //
+
+CREATE FUNCTION IsValidZip(zip_code VARCHAR(255))
+RETURNS BOOLEAN
+BEGIN
+    DECLARE valid BOOLEAN;
+    SET valid = zip_code REGEXP '^[0-9]{5}(?:-[0-9]{4})?$';
+    RETURN valid;
+END //
+
+DELIMITER ;
+
+-- Use the Function
+SELECT IsValidZip('12345') AS result;  -- Returns 1 (true)
+SELECT IsValidZip('1234') AS result;  -- Returns 0 (false)
+
+
+
+
+-- 1. Function to Calculate Annual Salary
+DELIMITER //
+CREATE FUNCTION CalculateAnnualSalary(salary DECIMAL(8,2))
+RETURNS DECIMAL(10,2)
+BEGIN
+    RETURN salary * 12;  -- Assuming salary is monthly
+END //
+DELIMITER ;
+
+SELECT
+    employee_id,
+    first_name,
+    last_name,
+    salary,
+    CalculateAnnualSalary(salary) AS annual_salary
+FROM employees;
+
+
+-- 2. Function to Calculate Total Commission
+DELIMITER //
+CREATE FUNCTION CalculateTotalCommission(salary DECIMAL(8,2), commission_pct DECIMAL(2,2))
+RETURNS DECIMAL(10,2)
+BEGIN
+    RETURN salary * commission_pct;  -- Total commission based on salary and commission percentage
+END //
+DELIMITER ;
+
+SELECT
+    employee_id,
+    first_name,
+    last_name,
+    salary,
+    commission_pct,
+    CalculateTotalCommission(salary, commission_pct) AS total_commission
+FROM employees;
+
+-- 3. Function to Validate Email Format
+DELIMITER //
+CREATE FUNCTION IsValidEmail(email VARCHAR(50))
+RETURNS BOOLEAN
+BEGIN
+    RETURN email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$';
+END //
+DELIMITER ;
+
+SELECT
+    employee_id,
+    first_name,
+    last_name,
+    email,
+    IsValidEmail(email) AS email_valid
+FROM employees;
+
+-- delete a function
+DROP FUNCTION IF EXISTS IsValidEmail;
