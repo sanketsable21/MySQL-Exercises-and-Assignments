@@ -306,6 +306,27 @@ DELETE FROM Trips
 WHERE route_id = 5 AND available_seats = 47;
 
 
+-- Rename column 
+ALTER TABLE Trips 
+RENAME COLUMN available_seats TO seat_availability;
+
+-- Rename multiple column
+ALTER TABLE Trips
+RENAME COLUMN seat_availability TO available_seats,
+RENAME COLUMN arrival_time TO reach_time;
+
+
+-- Update available_seats
+UPDATE Trips 
+SET available_seats = 50
+WHERE trip_id = 7;
+
+-- Update status
+UPDATE Trips
+SET status = 'CANCELLED'
+WHERE bus_id = 9;
+
+SET sql_safe_updates = 0;
 
 
 -- Table 05---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -320,9 +341,6 @@ CREATE TABLE Bookings(
     FOREIGN KEY(user_id) REFERENCES Users(user_id),
     FOREIGN KEY(trip_id) REFERENCES Trips(trip_id)
 );
-
--- Select for show data
-SELECT * FROM Bookings;
 
 -- Drop table
 DROP TABLE Bookings;
@@ -340,6 +358,22 @@ VALUES
 	(8, 8, 1200),
 	(9, 9, 300),
 	(10, 10, 300);
+    
+-- Select for show data
+SELECT * FROM Bookings;
+
+
+-- Select data using between clause
+SELECT * FROM Bookings 
+WHERE total_fare BETWEEN 500 AND 800;
+
+-- Select fare using order by clause
+SELECT * FROM Bookings
+ORDER BY total_fare DESC;
+
+
+
+
     
 -- Table 06---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Create table
