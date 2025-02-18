@@ -168,7 +168,7 @@ where company_name like'H%';
 
 -- 4. RENAME Query
 
--- 1. RENAME the databae
+-- 1. RENAME the database
 alter table companies rename to mnc_companies;
 
 -- 2. RENAME the database 
