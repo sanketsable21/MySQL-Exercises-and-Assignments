@@ -424,6 +424,8 @@ MOD=: Modulus assignment
 >>: Right shift
 
 
+
+
 6. String Operators
 
 CONCAT(): Concatenate strings (e.g., CONCAT('Hello', ' World'))
@@ -453,3 +455,117 @@ These operators cover a wide range of functionality, from basic arithmetic to ad
 string manipulations, enabling efficient data handling and querying in MySQL.
 
 */
+/*
+
+-- Bitwise Operator
+
+Get Binary Number -
+
+----------512, 256, 128, 64, 32, 16, 8, 4, 2,1
+
+Binary of 5 is 0101
+Binary of 3 is 0011
+
+Common Bitwise Operators in MySQL
+AND (&): Compares each bit of two numbers and returns a new number with bits set to 1 only where both bits are 1.
+OR (1): Compares each bit of two numbers and returns a new number with bits set to 1 where at least one of the bits is 1.
+XOR (^): Compares each bit of two numbers and returns a new number with bits set to 1 where the bits are different.
+NOT (~): Inverts the bits of a number.
+Left Shift (<<): Shifts the bits of a number to the left by a specified number of positions.
+Right Shift (>>): Shifts the bits of a number to the right by a specified number of positions.
+
+Bitwise operators can be useful in various scenarios, such as:
+
+1. Flags and Permissions: Using bitwise operations to manage user permissions or feature flags.
+2. Data Compression: Storing multiple boolean values in a single integer.
+3. Efficient Calculations: Performing low-level data manipulation or optimizations.
+
+Let's say we have a table called users that stores user permissions as a bitmask.
+Each permission corresponds to a specific bit in an integer:
+
+1 (0001) - Read permission
+2 (0010) Write permission
+4 (0100) Execute permission
+8 (1000) Delete permission.
+*/
+
+USE zoom;
+
+CREATE TABLE users (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(50) NOT NULL,
+	email VARCHAR(100) NOT NULL UNIQUE,
+	password_hash VARCHAR(255) NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	permissions INT NOT NULL
+);
+
+TRUNCATE users;
+-- Let's insert some users with different permissions:
+INSERT INTO users (username, email, password_hash, permissions) VALUES
+('Alice', 'alice@example.com', 'hashed_password_1', 3), -- Read (1) + Write (2) = 3 (0011)
+('Bob', 'bob@example.com', 'hashed_password_2', 5), -- Read (1) + Execute (4) = 5 (0101)
+('Charlie', 'charlie@example.com', 'hashed_password_3', 8), -- Delete (8)= 8 (1000)
+('David', 'david@example.com', 'hashed_password_4', 15), -- All permissions (1111)
+('Eve', 'eve@example.com', 'hashed_password_5', 1), -- Read (1)
+('Frank', 'frank@example.com', 'hashed_password_6', 6), -- Write (2) Execute (4) = 6 (0110)
+('Grace', 'grace@example.com', 'hashed_password_7', 10), -- Write (2) + Delete (8) 10 (1010)
+('Hannah', 'hannah@example.com', 'hashed_password_8', 12), -- Execute (4) + Delete (8) = 12 (1100)
+('Isaac', 'isaac@example.com', 'hashed_password_9', 0), -- No permissions
+('Jack', 'jack@example.com', 'hashed_password_10', 7); -- Read (1) + Write (2) + Execute (4) = 7 (0111)
+
+SELECT * FROM users;
+
+SELECT * FROM users WHERE (permissions & 1) = 1;  
+-- Users with Read permission
+
+SELECT * FROM users WHERE (permissions & 3) = 3;  
+-- Users with Read and Write permissions
+
+SELECT * FROM users WHERE (permissions & 2) = 2;  
+-- Users with Write permission
+
+SELECT * FROM users WHERE (permissions & 4) = 4;  
+-- Users with Execute permission
+
+SELECT * FROM users WHERE (permissions & 8) = 8;  
+-- Users with Delete permission
+
+-- Add Permission
+UPDATE users SET permissions = permissions & 4 WHERE username = 'Alice';
+UPDATE users SET permissions = permissions | 4 WHERE username = 'Alice';
+/*
+The error message you're encountering indicates that MySQL's "safe update mode" is enabled.
+This mode prevents you from executing UPDATE or DELETE statements that do not include
+a WHERE clause that uses a key column (like a primary key). This is a safety feature
+to prevent accidental updates or deletions of all rows in a table.
+*/
+
+--  Disable Safe Update Mode Temporarily
+SET SQL_SAFE_UPDATES = 0;
+
+SET SQL_SAFE_UPDATES = 1;  -- Re-enable safe updates
+
+
+-- Remove Permission
+UPDATE users SET permissions = permissions & ~1 WHERE username = 'Bob';
+
+-- Toggle Permission
+UPDATE users SET permissions = permissions ^ 8 WHERE username = 'Charlie';
+
+-- Count Users with a Specific Permission
+SELECT COUNT(*) AS user_count FROM users WHERE (permissions & 1) = 1;
+
+-- List Users with No Permissions
+SELECT * FROM users WHERE permissions = 0;
+
+-- List Users with All Permissions
+SELECT * FROM users WHERE permissions = 15;  -- 15 = 1111 in binary
+
+-- Get Permissions as Binary String
+SELECT username, BIN(permissions) AS permissions_binary FROM users;
+
+-- Find Users with At Least One Permission
+SELECT * FROM users WHERE permissions > 0;
+
