@@ -139,3 +139,26 @@ SELECT
     AVG(salary) OVER (PARTITION BY department) AS average_salary
 FROM
     emp11;
+    
+    -- Example 8: Using NTILE()
+-- Divide employees into quartiles based on their salary.
+SELECT
+    employee_id,
+    employee_name,
+     department,
+    salary,
+    NTILE(4) OVER (ORDER BY salary) AS salary_quartile
+FROM
+    emp11;
+    
+-- Example 9: Using FIRST_VALUE()
+-- Retrieve the first salary in each department.
+SELECT
+    employee_id,
+    employee_name,
+    department,
+    salary,
+    FIRST_VALUE(salary) OVER (PARTITION BY department ORDER BY salary) AS first_salary
+FROM
+    emp11;
+    
