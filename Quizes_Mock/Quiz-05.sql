@@ -30,7 +30,7 @@ CREATE TABLE Customers (
 );
 
 -- Insert Sample Data into Customers Table
-INSERT INTO Customers (FullName, Email, PhoneNumber, DOB) VALUES
+INSERT INTO Customers (FullName, Email, ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ('Rahul Sharma', 'rahul.sharma@example.com', '9876543210', '1995-04-15'),
 ('Priya Singh', 'priya.singh@example.com', '9876543211', '1993-08-22'),
 ('Amit Mehta', 'amit.mehta@example.com', '9876543212', '1990-06-10'),
